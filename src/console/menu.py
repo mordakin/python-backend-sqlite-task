@@ -26,15 +26,6 @@ def login_menu():
 
 
 def registration_menu():
-    def password_func():
-        password = input('Введите пароль: ')
-        repeat_password = input('Повторите пароль: ')
-        if password != repeat_password:
-            print('Пароли не совпадают, попробуйте снова')
-            password_func()
-        else:
-            menu_users()
-
     print('\nПодсказка: для выхода напишите exit\n')
     a = input('Введите имя: ')
     if a == 'exit':
@@ -55,6 +46,16 @@ def registration_menu():
     if a == 'exit':
         authorization()
     password_func()
+
+
+def password_func():
+    password = input('Введите пароль: ')
+    repeat_password = input('Повторите пароль: ')
+    if password != repeat_password:
+        print('Пароли не совпадают, попробуйте снова')
+        password_func()
+    else:
+        menu_users()
 
 
 def menu_users():
