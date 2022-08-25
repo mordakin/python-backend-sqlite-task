@@ -1,6 +1,7 @@
 import sqlite3
+import os
 
-db = sqlite3.connect('D:/GitHub/mordakin/python-backend-sqlite-task/corpus.db')
+db = sqlite3.connect(os.path.abspath(__file__ + '/../../../corpus.db'))
 cur = db.cursor()
 
 cur.execute('''
