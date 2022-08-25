@@ -98,6 +98,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     elif choice == 3:
         sys.exit()
 
+
 def face_of_proggram():
     print('''
 Лица проекта
@@ -123,10 +124,12 @@ def face_of_proggram():
     elif choice == 3:
         sys.exit()
 
+
 def apply():
     print('''Заявка отправлена на рассмотрение''')
     # отправление заявки в БД
     menu_users()
+
 
 def admin_menu():
     print('''
@@ -146,9 +149,13 @@ def admin_menu():
     elif choice == 4:
         sys.exit()
 
+
 def all_clients():
-    pass #придумать как выводить инфу о всех пользователях
+    pass  # придумать как выводить инфу о всех пользователях
+
+
 def statement():
-    pass # придуматб как вывести информацию о заявках
+    pass  # придуматб как вывести информацию о заявках
+
 
 authorization()
