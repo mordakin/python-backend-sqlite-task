@@ -1,5 +1,5 @@
 import sys
-
+from src.db.create_table import data_insert
 
 def authorization():
     print('''Авторизация
@@ -26,36 +26,40 @@ def login_menu():
 
 
 def registration_menu():
+    dict_data = {}
     print('\nПодсказка: для выхода напишите exit\n')
-    a = input('Введите имя: ')
-    if a == 'exit':
+    name = input('Введите имя: ')
+    if name == 'exit':
         authorization()
-    a = input('Введите фамилию: ')
-    if a == 'exit':
-        authorization()
-    a = input('Введите отчество: ')
-    if a == 'exit':
-        authorization()
-    a = input('Введите страну проживания: ')
-    if a == 'exit':
-        authorization()
-    a = input('Введите образовательное учреждение: ')
-    if a == 'exit':
-        authorization()
-    a = input('Введите email: ')
-    if a == 'exit':
-        authorization()
-    password_func()
-
-
-def password_func():
-    password = input('Введите пароль: ')
-    repeat_password = input('Повторите пароль: ')
-    if password != repeat_password:
-        print('Пароли не совпадают, попробуйте снова')
-        password_func()
     else:
-        menu_users()
+        dict_data['name'] = name
+    surname = input('Введите фамилию: ')
+    if surname == 'exit':
+        authorization()
+    else:
+        dict_data['surname'] = surname
+    patronymic = input('Введите отчество: ')
+    if patronymic == 'exit':
+        authorization()
+    else:
+        dict_data['patronymic'] = patronymic
+    email = input('Введите email: ')
+    if email == 'exit':
+        authorization()
+    else:
+        dict_data['email'] = email
+    data_insert(dict_data)
+
+
+
+# def password_func():
+#     password = input('Введите пароль: ')
+#     repeat_password = input('Повторите пароль: ')
+#     if password != repeat_password:
+#         print('Пароли не совпадают, попробуйте снова')
+#         password_func()
+#     else:
+#         menu_users()
 
 
 def menu_users():
@@ -159,4 +163,4 @@ def statement():
     pass  # придуматб как вывести информацию о заявках
 
 
-authorization()
+registration_menu()
