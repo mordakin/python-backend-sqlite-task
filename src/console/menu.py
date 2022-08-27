@@ -1,5 +1,6 @@
 import sys
-from src.db.create_table import data_insert
+from src.db.create_table import data_insert_from_registration
+
 
 def authorization():
     print('''Авторизация
@@ -26,6 +27,7 @@ def login_menu():
 
 
 def registration_menu():
+    global dict_data
     dict_data = {}
     print('\nПодсказка: для выхода напишите exit\n')
     name = input('Введите имя: ')
@@ -43,23 +45,39 @@ def registration_menu():
         authorization()
     else:
         dict_data['patronymic'] = patronymic
+    country = input('Введите страну: ')
+    if country == 'exit':
+        authorization()
+    else:
+        dict_data['country'] = country
+    educational_institution = input('Введите образовательное учреждение: ')
+    if educational_institution == 'exit':
+        authorization()
+    else:
+        dict_data['educational_institution'] = educational_institution
+    phone_number = input('Введите номер телефона: ')
+    if phone_number == 'exit':
+        authorization()
+    else:
+        dict_data['phone_number'] = phone_number
     email = input('Введите email: ')
     if email == 'exit':
         authorization()
     else:
         dict_data['email'] = email
-    data_insert(dict_data)
+    password_func()
 
 
-
-# def password_func():
-#     password = input('Введите пароль: ')
-#     repeat_password = input('Повторите пароль: ')
-#     if password != repeat_password:
-#         print('Пароли не совпадают, попробуйте снова')
-#         password_func()
-#     else:
-#         menu_users()
+def password_func():
+    password = input('Введите пароль: ')
+    repeat_password = input('Повторите пароль: ')
+    if password != repeat_password:
+        print('Пароли не совпадают, попробуйте снова')
+        password_func()
+    else:
+        dict_data['password'] = password
+        data_insert_from_registration(dict_data)
+        menu_users()
 
 
 def menu_users():
@@ -74,7 +92,7 @@ def menu_users():
     if choice == 1:
         about_project()
     elif choice == 2:
-        face_of_proggram()
+        face_of_program()
     elif choice == 3:
         apply()
     elif choice == 4:
@@ -89,7 +107,12 @@ def menu_users():
 def about_project():
     print('''
 О проекте
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum.
 
 1. Назад
 2. Выйти из аккаунта
@@ -104,7 +127,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         sys.exit()
 
 
-def face_of_proggram():
+def face_of_program():
     print('''
 Лица проекта
 №1
