@@ -1,6 +1,6 @@
 import sys
-from src.db.create_table import data_insert_from_registration, examination_of_user, data_insert_request_status, \
-    get_information_about_clients, get_information_about_apply
+from src.db.create_table import data_insert_from_registration,examination_of_user,data_insert_request_status,\
+    get_information_about_clients
 
 
 def authorization():
@@ -82,8 +82,7 @@ def registration_menu():
     else:
         email_user = email
         dict_data['email'] = email
-
-        password_func()
+    password_func()
 
 
 def password_func():
@@ -203,16 +202,20 @@ def all_clients_information():
     global dict_data, email_user
 
     get_information_about_clients()
+    print(f'''
+ID: {dict_data['id']}
+ФИО: {dict_data['surname']} {dict_data['name']} {dict_data['patronymic'] or ''}
+Страна: {dict_data['country']}
+Образовательное учреждение: {dict_data['educational_institution']}
+Телефон: {dict_data['phone_number']}
+Почта: {dict_data['email']}
+Статус заявки: {dict_data['request_status'] or '-'}''')
     admin_menu()
 
 
+
 def information_about_apply():
-    get_information_about_apply()
-    export_on_csv()
+    pass  # придуматб как вывести информацию о заявках
 
 
 authorization()
-
-
-def export_on_csv():
-    pass
