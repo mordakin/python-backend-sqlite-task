@@ -1,3 +1,4 @@
+import os
 import sys
 import csv
 from src.db.create_table import data_insert_from_registration, examination_of_user, data_insert_request_status, \
@@ -269,13 +270,15 @@ def menu_export_on_csv():
 
 
 def func_input_csv():
-    with open('C:/Users/chumi/Desktop/GitHub/mordakin/python-backend-sqlite-task/test2.csv', 'w', newline='') as test:
+    csv_path = os.path.abspath(__file__ + '/../../../docs/test2.csv')
+
+    with open(csv_path, 'w', newline='') as test:
         writer = csv.writer(test, delimiter=';')
         writer.writerow(
             ('id', 'name', 'surname', 'patronymic', 'country', 'educational_institution', 'phone_number'
              , 'email', 'password', 'request_status', 'is_admin', 'logged_in')
         )
-    with open('C:/Users/chumi/Desktop/GitHub/mordakin/python-backend-sqlite-task/test2.csv', 'a', newline='') as test:
+    with open(csv_path, 'a', newline='') as test:
         writer = csv.writer(test, delimiter=';')
         writer.writerows(
             res
