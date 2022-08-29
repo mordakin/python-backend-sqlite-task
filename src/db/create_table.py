@@ -30,6 +30,22 @@ def data_insert_from_registration(dict_data):
     db.commit()
 
 
+def logged_in_online(logged_in):
+    cur.execute('''UPDATE test_data
+    SET logged_in = '1'
+    WHERE email = :email
+    ''', logged_in)
+    db.commit()
+
+
+def logged_in_offline(logged_in):
+    cur.execute('''UPDATE test_data
+    SET logged_in = '0'
+    WHERE email = :email
+    ''', logged_in)
+    db.commit()
+
+
 def examination_of_user(email):
     cur.execute('''SELECT is_admin
     FROM test_data
@@ -81,3 +97,11 @@ def get_information_about_apply():
         print('Страна:', i[4])
         print('Телефон:', i[6])
         print('\n')
+
+
+def csv_data():
+    cur.execute('''SELECT * FROM test_data
+        WHERE is_admin = 0
+        ''')
+    res = cur.fetchall()
+    return res

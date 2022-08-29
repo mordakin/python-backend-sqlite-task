@@ -1,6 +1,7 @@
 import sys
+import csv
 from src.db.create_table import data_insert_from_registration, examination_of_user, data_insert_request_status, \
-    get_information_about_clients, get_information_about_apply
+    get_information_about_clients, get_information_about_apply, csv_data, logged_in_online, logged_in_offline
 
 
 def authorization():
@@ -37,8 +38,10 @@ def login_menu():
     if examination_of_user(user_data) == None:
         login_menu()
     elif examination_of_user(user_data) == 1:
+        send_logged_in()
         admin_menu()
     else:
+        send_logged_in()
         menu_users()
 
 
@@ -95,7 +98,20 @@ def password_func():
     else:
         dict_data['password'] = password
         data_insert_from_registration(dict_data)
+        send_logged_in()
         menu_users()
+
+
+def send_logged_in():
+    dict_data = {}
+    dict_data['email'] = email_user
+    logged_in_online(dict_data)
+
+
+def out_logged_in():
+    dict_data = {}
+    dict_data['email'] = email_user
+    logged_in_offline(dict_data)
 
 
 def menu_users():
@@ -114,8 +130,10 @@ def menu_users():
     elif choice == 3:
         apply()
     elif choice == 4:
+        out_logged_in()
         authorization()
     elif choice == 5:
+        out_logged_in()
         sys.exit()
     else:
         print('Неккоректный ввод, попробуйте снова')
@@ -136,13 +154,17 @@ mollit anim id est laborum.
 2. Выйти из аккаунта
 3. Закрыть программу
 ''')
-    choice = int(input('Введите номер варианта: '))
-    if choice == 1:
+    choice = (input('Введите номер варианта: '))
+    if choice == '1':
         menu_users()
-    elif choice == 2:
+    elif choice == '2':
+        out_logged_in()
         authorization()
-    elif choice == 3:
+    elif choice == '3':
+        out_logged_in()
         sys.exit()
+    else:
+        print('Неккоректный ввод, попробуйте снова')
 
 
 def face_of_program():
@@ -162,13 +184,18 @@ def face_of_program():
 2. Выйти из аккаунта
 3. Закрыть программу
 ''')
-    choice = int(input('Введите номер варианта: '))
-    if choice == 1:
+    choice = (input('Введите номер варианта: '))
+    if choice == '1':
         menu_users()
-    elif choice == 2:
+    elif choice == '2':
+        out_logged_in()
         authorization()
-    elif choice == 3:
+    elif choice == '3':
+        out_logged_in()
         sys.exit()
+    else:
+        print('Неккоректный ввод, попробуйте снова')
+        face_of_program()
 
 
 def apply():
@@ -188,31 +215,73 @@ def admin_menu():
 3. Выход из аккаунта
 4. Закрыть программу
 ''')
-    choice = int(input('Введите номер варианта: '))
-    if choice == 1:
+    choice = (input('Введите номер варианта: '))
+    if choice == '1':
         all_clients_information()
-    elif choice == 2:
+    elif choice == '2':
         information_about_apply()
-    elif choice == 3:
+    elif choice == '3':
+        out_logged_in()
         authorization()
-    elif choice == 4:
+    elif choice == '4':
+        out_logged_in()
         sys.exit()
+    else:
+        print('Неккоректный ввод, попробуйте снова')
+        admin_menu()
 
 
 def all_clients_information():
     global dict_data, email_user
 
     get_information_about_clients()
-    admin_menu()
+    menu_export_on_csv()
 
 
 def information_about_apply():
     get_information_about_apply()
-    export_on_csv()
+    admin_menu()
+
+
+def menu_export_on_csv():
+    global res
+    print('''
+1. Экспортировать в CSV
+2. Назад
+3. Выход из аккаунта
+4. Закрыть программу
+''')
+    choice = (input('Введите номер варианта: '))
+    if choice == '1':
+        res = csv_data()
+        func_input_csv()
+    elif choice == '2':
+        admin_menu()
+    elif choice == '3':
+        out_logged_in()
+        authorization()
+    elif choice == '4':
+        out_logged_in()
+        sys.exit()
+    else:
+        print('Неккоректный ввод, попробуйте снова')
+        menu_export_on_csv()
+
+
+def func_input_csv():
+    with open('C:/Users/chumi/Desktop/GitHub/mordakin/python-backend-sqlite-task/test2.csv', 'w', newline='') as test:
+        writer = csv.writer(test, delimiter=';')
+        writer.writerow(
+            ('id', 'name', 'surname', 'patronymic', 'country', 'educational_institution', 'phone_number'
+             , 'email', 'password', 'request_status', 'is_admin', 'logged_in')
+        )
+    with open('C:/Users/chumi/Desktop/GitHub/mordakin/python-backend-sqlite-task/test2.csv', 'a', newline='') as test:
+        writer = csv.writer(test, delimiter=';')
+        writer.writerows(
+            res
+        )
+        print("Всё успешно экспортированно")
+    admin_menu()
 
 
 authorization()
-
-
-def export_on_csv():
-    pass

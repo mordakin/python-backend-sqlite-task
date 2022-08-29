@@ -1,0 +1,11 @@
+id;name;surname;patronymic;country;educational_institution;phone_number;email;password;request_status;is_admin;logged_in
+2;Max;Kor;;Ru;mirea;8977;max@;123;SENT;0;0
+3;Ivan;Post;;Ru;mirea;8915;ivan@;321;;0;
+4;Miron;Isakov;;Por;stanf;+334;mir@;555;;0;
+5;Vika;Bardor;;Est;garv;2234;vika@;000;SENT;0;
+6;Dasha;Nokil;Serg;Ru;msu;8905;dasha@;111;SENT;0;
+9;Rinat;Aspekov;Tigr;AZ;tdg;678;rinat@;1;;0;
+10;Macho;Men;;ru;vila;456;men@;1;;0;
+11;Rita;Volk;;ru;mfti;876;volk@;1;;0;
+12;Mark;Mertv;;ru;vik;1234;mark@;123;;0;
+13;Sasha;Sip;;ger;werew;173;sip@;1;;0;0
