@@ -285,6 +285,3 @@ def func_input_csv():
         )
         print("Всё успешно экспортированно")
     admin_menu()
-
-
-authorization()
